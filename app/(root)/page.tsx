@@ -14,11 +14,10 @@ const Home = () => {
           user={loggedIn?.firstname || "Guest"}
           subtext="Access and Manage Your Account and Transactions efficiently"
         />
-        <TotalBalanceBox 
-        accounts={[]} 
-        totalBanks={1}
-        totalCurrentBalance={1250.59}
-
+        <TotalBalanceBox
+          accounts={[]}
+          totalBanks={1}
+          totalCurrentBalance={1250.59}
         />
       </div>
     </section>
