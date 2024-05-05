@@ -22,6 +22,7 @@ import CustomInputFormField from "./CustomInputFormField";
 import { authFormSchema } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { signIn, signUp } from "@/lib/actions/user.actions";
 
 const AuthForm = ({ type }: { type: string }) => {
   const [user, setUser] = useState(null);
@@ -46,16 +47,17 @@ const AuthForm = ({ type }: { type: string }) => {
       console.log(data);
 
       if (type === "sign-up") {
-        // const newUser =  await signUp(data);
-        // setUser(newUser);
+        const newUser = await signUp(data);
+        setUser(newUser);
       }
-      if (type === "sign-in") {
-        // const response = await signIn({
-        //   email: data.email,
-        //   password: data.password,
-        // });
 
-        // if (response) router.replace("/");
+      if (type === "sign-in") {
+        const response = await signIn({
+          email: data.email,
+          password: data.password,
+        });
+
+        if (response) router.replace("/");
       }
     } catch (error) {
       console.log(error);
@@ -144,7 +146,7 @@ const AuthForm = ({ type }: { type: string }) => {
                         name="dateOfBirth"
                         control={form.control}
                         label="Date Of Birth"
-                        placeholder="Ex: yyyy-mm-dd"
+                        placeholder="Ex: DD-MM-YYYY"
                       />
                       <CustomInputFormField
                         name="ssn"
